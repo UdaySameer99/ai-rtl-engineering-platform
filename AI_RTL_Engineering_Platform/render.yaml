@@ -2,6 +2,7 @@ services:
   - type: web
     name: ai-rtl-engineering-platform
     runtime: docker
+    rootDir: AI_RTL_Engineering_Platform
     plan: free
     healthCheckPath: /api/health
     envVars:
