@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RTL Engineering Workbench</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><div class="brandmark">R</div><div><strong>RTL WORKBENCH</strong><span>AI ENGINEERING SUITE</span></div></div>
+  <div class="topright"><span class="status-dot"></span><span id="healthText">Checking cloud services…</span><span class="version">CLOUD EDITION</span></div>
+</header>
+<main>
+  <section class="hero">
+    <div class="eyebrow">DESIGN · ANALYZE · VERIFY</div>
+    <h1>RTL Engineering<br><em>Workbench.</em></h1>
+    <p>Generate hardware descriptions, investigate design issues and run Verilog simulations in the cloud.</p>
+  </section>
+
+  <section class="workspace">
+    <aside class="sidebar">
+      <div class="side-label">WORKFLOW</div>
+      <button class="nav active" data-panel="generate"><span>01</span> Generate RTL</button>
+      <button class="nav" data-panel="review"><span>02</span> Review & detect bugs</button>
+      <button class="nav" data-panel="fix"><span>03</span> Correct RTL</button>
+      <button class="nav" data-panel="testbench"><span>04</span> Generate testbench</button>
+      <div class="side-note"><b>Cloud execution</b><p>AI and HDL compilation run on the deployed server. Your device only displays this interface.</p></div>
+    </aside>
+
+    <div class="mainpanel">
+      <div class="panelhead"><div><div class="eyebrow" id="stepLabel">WORKFLOW / 01</div><h2 id="panelTitle">Generate RTL</h2></div><span class="chip">AI ASSISTED</span></div>
+
+      <div id="promptWrap" class="field">
+        <label for="prompt">DESIGN SPECIFICATION / INSTRUCTIONS</label>
+        <textarea id="prompt" rows="4" placeholder="Example: Design a 4-bit synchronous up counter with active-low asynchronous reset. Include a self-checking testbench."></textarea>
+      </div>
+
+      <div id="codeWrap" class="field hidden">
+        <div class="fieldtop"><label for="rtl">RTL SOURCE</label><button class="textbtn" id="loadExample">LOAD EXAMPLE</button></div>
+        <textarea id="rtl" class="code" spellcheck="false" placeholder="Paste Verilog or SystemVerilog here…"></textarea>
+      </div>
+
+      <div id="tbWrap" class="field hidden">
+        <div class="fieldtop"><label for="testbench">TESTBENCH (OPTIONAL FOR AI REVIEW)</label><button class="textbtn" id="loadTb">LOAD EXAMPLE TB</button></div>
+        <textarea id="testbench" class="code smallcode" spellcheck="false" placeholder="Paste a testbench here…"></textarea>
+      </div>
+
+      <div class="actions">
+        <button class="primary" id="runAI">Generate RTL <span>→</span></button>
+        <button class="secondary" id="clear">Clear</button>
+      </div>
+
+      <div id="busy" class="busy hidden"><span class="spinner"></span><span id="busyText">Contacting cloud AI…</span></div>
+      <div id="error" class="error hidden"></div>
+      <section id="resultSection" class="result hidden">
+        <div class="resulthead"><div><div class="eyebrow">AI RESPONSE</div><h3>Engineering output</h3></div><button class="textbtn" id="copyResult">COPY ALL</button></div>
+        <pre id="resultText"></pre>
+        <div class="resultactions"><button class="secondary" id="useResult">Use response as RTL source</button></div>
+      </section>
+
+      <section class="simulator">
+        <div class="simhead"><div><div class="eyebrow">CLOUD HDL TOOLCHAIN</div><h3>Compile & simulate</h3></div><span class="chip neutral">ICARUS VERILOG</span></div>
+        <p>Paste a design and a testbench above. The server compiles and runs both in an isolated temporary job directory.</p>
+        <div class="field compact"><label for="top">TOP MODULE (OPTIONAL)</label><input id="top" placeholder="e.g. tb_counter"></div>
+        <button class="primary" id="simulate">Compile & Simulate <span>→</span></button>
+        <div id="simBusy" class="busy hidden"><span class="spinner"></span><span>Compiling and running on cloud server…</span></div>
+        <div id="simResult" class="simresult hidden"></div>
+      </section>
+    </div>
+  </section>
+  <footer><span>RTL WORKBENCH</span><span>AI assistance is advisory. Validate critical designs independently.</span></footer>
+</main>
+<script src="/static/app.js"></script>
+</body></html>

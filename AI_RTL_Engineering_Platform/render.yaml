@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: ai-rtl-engineering-platform
+    runtime: docker
+    plan: free
+    healthCheckPath: /api/health
+    envVars:
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GEMINI_MODEL
+        value: gemini-2.5-flash
+      - key: SIM_TIMEOUT
+        value: "12"
